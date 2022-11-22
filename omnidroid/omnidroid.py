@@ -28,7 +28,7 @@ def readInput(filename):
     for i in range(m + 1, len(clean_input)):
         sprockets.append(clean_input[i][0])
     
-    print(dep, sprockets)
+    # print(dep, sprockets)
 
     return dep, sprockets
     
@@ -38,7 +38,7 @@ def omnidroid(num, cache, dependency, sprockets):
         return cache[num]
     
     if dependency[num] == []:
-        return cache[num]
+        return sprockets[num]
     
     total_dependency = 0
     for t in dependency[num]:
@@ -48,10 +48,9 @@ def omnidroid(num, cache, dependency, sprockets):
     return cache[num]
 
 if __name__ == "__main__":
-    uset1, sprocketst1 = readInput('textfiles/small-omni-input.txt')
-    ch = {}
+    uset1, sprocketst1 = readInput('/Users/emanuelaseghehey/Development/Algo-project-2/textfiles/small-omni-input.txt')
     # uset2, sprocketst2 = readInput('small-omni-input.txt')
 
-    print(omnidroid(len(sprocketst1) - 1, ch, uset1, sprocketst1))
+    print(omnidroid(len(sprocketst1) - 1, {}, uset1, sprocketst1))
     # print(omnidroid(len(sprocketst2) - 1, {}, uset2, sprocketst2))
     
