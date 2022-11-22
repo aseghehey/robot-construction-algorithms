@@ -28,29 +28,32 @@ def readInput(filename):
     for i in range(m + 1, len(clean_input)):
         sprockets.append(clean_input[i][0])
     
-    # print(dep, sprockets)
+    print(dep, sprockets)
 
     return dep, sprockets
     
-def omnidroid(num, cache, use, sprockets):
+def omnidroid(num, cache, dependency, sprockets):
+
     if num in cache: # memoization
         return cache[num]
     
-    if use[num] == []:
-        return sprockets[num]
+    if dependency[num] == []:
+        return cache[num]
     
-    added_use = 0
-    for t in use[num]:
-        added_use += omnidroid(t, cache, use, sprockets)
+    total_dependency = 0
+    for t in dependency[num]:
+        total_dependency += omnidroid(t, cache, dependency, sprockets)
     
-    cache[num] = sprockets[num] + added_use
+    cache[num] = sprockets[num] + total_dependency
     return cache[num]
 
 if __name__ == "__main__":
 
-    uset1, sprocketst1 = readInput('input.txt')
-    uset2, sprocketst2 = readInput('small-omni-input.txt')
+    uset1, sprocketst1 = readInput('small-omni-input.txt')
+    ch = {}
+    # uset2, sprocketst2 = readInput('small-omni-input.txt')
 
-    print(omnidroid(len(sprocketst1) - 1, {}, uset1, sprocketst1))
-    print(omnidroid(len(sprocketst2) - 1, {}, uset2, sprocketst2))
+    print(omnidroid(4, ch, uset1, sprocketst1))
+    print(ch)
+    # print(omnidroid(len(sprocketst2) - 1, {}, uset2, sprocketst2))
     
